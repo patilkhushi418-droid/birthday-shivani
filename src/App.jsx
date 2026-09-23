@@ -1,14 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
+const BASE = import.meta.env.BASE_URL;
+
 const fancyImages = Array.from(
   { length: 11 },
-  (_, i) => `/images/fancy${i + 1}.jpeg`
+  (_, i) => `${BASE}images/fancy${i + 1}.jpeg`
 );
 
 const treasureImages = Array.from(
   { length: 9 },
-  (_, i) => `/images/treasure${i + 1}.jpeg`
+  (_, i) =>
+    `${BASE}images/treasure${i + 1}.jpeg`
 );
 
 const fancyMessages = [
@@ -22,7 +25,7 @@ const fancyMessages = [
   "Fancy Shivani didi.",
   "kisko dhundh rhe ho.",
   "Just you being you ♡ ",
-  "Keeping this memory forever.~hostelcore"
+  "Keeping this memory forever.~hostelcore",
 ];
 
 const treasureMessages = [
@@ -34,7 +37,7 @@ const treasureMessages = [
   "Sanyas le liye ? 😭",
   "This is going straight into the memory vault #First bday",
   "Didi ke fitchecks .",
-  "And this is exactly why I love our memories. Great time spent together"
+  "And this is exactly why I love our memories. Great time spent together",
 ];
 
 function App() {
@@ -81,7 +84,11 @@ function App() {
   };
 
   useEffect(() => {
-    if (page === 4 && section !== "di" && audioRef.current) {
+    if (
+      page === 4 &&
+      section !== "di" &&
+      audioRef.current
+    ) {
       audioRef.current.currentTime = 0;
 
       audioRef.current.play().catch(() => {
@@ -91,8 +98,14 @@ function App() {
   }, [page, section]);
 
   const getSong = () => {
-    if (section === "fancy") return "/music/fancy.mp3";
-    if (section === "treasure") return "/music/treasure.mp3";
+    if (section === "fancy") {
+      return `${BASE}music/fancy.mp3`;
+    }
+
+    if (section === "treasure") {
+      return `${BASE}music/treasure.mp3`;
+    }
+
     return "";
   };
 
@@ -152,8 +165,6 @@ function App() {
               <br />
               to you ♡
             </h2>
-
-            {/* YOUR FINAL MESSAGE WILL GO HERE */}
 
             <p>
               Living with you has given me so many random, funny and
@@ -426,7 +437,7 @@ function App() {
               controls
               playsInline
               preload="auto"
-              src="/videos/di1.mp4"
+              src={`${BASE}video/di1.mp4`}
               style={{
                 width: "90%",
                 maxWidth: "500px",
@@ -533,7 +544,7 @@ function App() {
                   controls
                   playsInline
                   preload="auto"
-                  src="/videos/di1.mp4"
+                  src={`${BASE}video/di1.mp4`}
                   style={{
                     display: "block",
                     width: "100%",
